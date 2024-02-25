@@ -12,6 +12,7 @@ function kjøpBilletter() {
         email : document.getElementById("email").value
     };
 
+    //Sjekekr om feltene er fylt ut
     if (!billett.antall || !billett.fornavn || !billett.etternavn || !billett.telefonnummer || !billett.email){
         document.getElementById("antallError").innerHTML = "Feltet må fylles ut!";
         document.getElementById("fornavnError").innerHTML = "Feltet må fylles ut!";
@@ -19,8 +20,43 @@ function kjøpBilletter() {
         document.getElementById("tlfnrError").innerHTML = "Feltet må fylles ut!";
         document.getElementById("emailError").innerHTML = "Feltet må fylles ut!";
     }
+
+    //Hvis alle fletene er fylt ut kjøp billett
     else {
         billetter.push(billett);
+
+        //sjekker om en film har blitt valgt
+        if (!billett.antall || !billett.fornavn || !billett.etternavn || !billett.telefonnummer || !billett.email || !billett.film) {
+            // ... (eksisterende feilmeldinger)
+            document.getElementById("filmError").innerHTML = "Du må velge en film!";
+        } else {
+            // ... (eksisterende logikk)
+            document.getElementById("filmError").innerHTML = "";
+        }
+
+        //Sjekker om navn og etternavn bruker gyldige tegn
+        const navnRegex = /^[a-zA-Z\s]+$/;
+
+        if (!navnRegex.test(billett.fornavn)) {
+            document.getElementById("fornavnError").innerHTML = "Ugyldige tegn i fornavn!";
+        }
+
+        if (!navnRegex.test(billett.etternavn)) {
+            document.getElementById("etternavnError").innerHTML = "Ugyldige tegn i etternavn!";
+        }
+
+        //Sjekker om email og telefonnummer er gyldig
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const telefonnummerRegex = /^\d{8,}$/;
+
+        if (!emailRegex.test(billett.email)) {
+            document.getElementById("emailError").innerHTML = "Ugyldig e-postadresse!";
+        }
+
+        if (!telefonnummerRegexRegex.test(billett.telefonnummer)) {
+            document.getElementById("tlfnrError").innerHTML = "Ugyldig telefonnummer!";
+        }
+
 
         for(let liste of billetter){
             ut += "<tr>"
